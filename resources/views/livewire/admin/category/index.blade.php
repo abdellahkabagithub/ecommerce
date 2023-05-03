@@ -50,8 +50,8 @@
                                     <td>{{ $categorie->name }}</td>
                                     <td>{{ $categorie->status = '1' ? 'Hidden': 'Visible' }}</td>
                                     <td>
-                                        <a href="{{ url('admin/category/'.$categorie->id.'/edit') }}" class="btn btn-success text-white font-bold">Modifier</a>
-                                        <a href="" wire:click="deleteCategory({{ $categorie->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger text-white font-bold">Supprimer</a>
+                                        <a href="{{ url('admin/category/'.$categorie->id.'/edit') }}" class="btn btn-success btn-sm text-white font-bold">Modifier</a>
+                                        <a href="" wire:click="deleteCategory({{ $categorie->id }})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-sm btn-danger text-white font-bold">Supprimer</a>
                                     </td>
                                 </tr>
                             @endforeach

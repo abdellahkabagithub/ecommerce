@@ -12,7 +12,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ url('admin/category') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ url('admin/category') }}" enctype="multipart/form-data" method="POST" autocomplete="false">
                     @csrf
                    <div class="row">
                         <div class="col-md-6 mb-3">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="">Image</label>
-                            <input type="file" class="form-control" name="image[]">
+                            <input type="file" class="form-control" name="image">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="">Status</label><br>
@@ -59,7 +59,7 @@
                             <textarea name="meta_description" class="form-control"  rows="3"></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <button type="submit" class="btn btn-primary float-end">Enregistré</button>
+                            <button type="submit" class="btn btn-primary text-white float-end">Enregistré</button>
                         </div>
                    </div>
 

@@ -39,7 +39,7 @@
                                 <td>{{ $product->status == '1' ? 'Hidden':'Visible'}}</td>
                                 <td>
                                     <a href="{{ url('admin/products/'.$product->id.'/edit') }}" class="btn btn-sm btn-success text-white">Modifier</a>
-                                    <a href="" class="btn btn-sm btn-danger text-white">Supprimer</a>
+                                    <a href="{{ url('admin/products/'.$product->id.'/delete' ) }}" onclick="return confirm('Vous êtes sûr de vouloir supprimer cette photo ? ')" class="btn btn-sm btn-danger text-white">Supprimer</a>
                                 </td>
                             </tr>
                             @empty

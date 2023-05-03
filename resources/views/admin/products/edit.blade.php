@@ -12,6 +12,9 @@
                 </div>
                 <div class="card-body">
 
+                    @if(session('message'))
+                        <h5 class="alert alert-success">{{ session('message') }}</h5>
+                    @endif
                     @if($errors->any())
                         <div class="alert alert-warning">
                             @foreach ($errors->all() as $error)
@@ -20,7 +23,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ url('admin/products/'.$product->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('admin/products/'.$product->id) }}" method="POST" enctype="multipart/form-data" autocomplete="false">
                         @csrf
                         @method('PUT')
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -42,11 +45,12 @@
                           <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade border p-4  show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                 <div class="mb-3">
-                                    <label for="">Category</label>
+                                    <label for="">Selectionner une catégorie</label>
                                     <select name="category_id" id="" class="form-control">
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }} {{$category->id == $product->category_id ? 'selected': '' }}">{{ $category->name }}</option>
-                                        @endforeach
+                                        <option value="">---------------</option>
+                                        @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}" {{ $product->category_id == $item->id ? 'selected':'' }}>{{ $item->name }}</option>
+                                         @endforeach
                                     </select>
                                 </div>
     
@@ -61,9 +65,10 @@
     
                                 <div class="mb-3">
                                     <label for="">Choisir Une marque</label>
-                                    <select name="brand" id="" class="form-control">
-                                        @foreach ($brands as $brand)
-                                            <option value="{{ $brand->id }}  {{$brand->name == $product->brand ? 'selected': '' }}">{{ $brand->name }}</option>
+                                    <select name="brand" class="form-control">
+                                        <option value="">Selectionner une marque</option>
+                                        @foreach($brands as $brand)
+                                        <option value="{{ $brand->name }}" {{ $brand->name == $product->brand ? 'selected':'' }}> {{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -140,7 +145,22 @@
                             <div class="tab-pane fade border p-4" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="">Selectionner l'image</label>
-                                    <input type="file" name="image" multiple class="form-control">
+                                    <input type="file" name="image[]" multiple class="form-control">
+                                </div>
+
+                                <div>
+                                    @if($product->productImages)
+                                        <div class="row">
+                                            @foreach ($product->productImages as $image)
+                                            <div class="col-md-2">
+                                                <img src="{{ asset($image->image) }}" style="width: 80px; height: 80px;" alt="Img"class="me-4 border">
+                                            <a href="{{ url('admin/product-image/'.$image->id.'/delete') }}" class="d-block">Supprimer</a>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        @else
+                                        <h5>Pas d'image</h5>
+                                    @endif
                                 </div>
                             </div>
                             <div class="tab-pane fade border p-4" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
@@ -149,7 +169,7 @@
                           </div>
     
                           <div>
-                            <button type="submit" class="btn-primary text-white text-center">Valider</button>
+                            <button type="submit" class="btn-primary text-white text-center">Modifier</button>
                           </div>
                     </form>
                     

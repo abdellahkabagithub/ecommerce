@@ -20,8 +20,9 @@
                         </div>
                     @endif
 
-                    <form action="{{ url('admin/products') }}" method="POST" enctype="multipart/form-data">
+                    <form  autocomplete="true" action="{{ url('admin/products') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
+                        
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Acceuil</button>
@@ -43,6 +44,7 @@
                                 <div class="mb-3">
                                     <label for="">Category</label>
                                     <select name="category_id" id="" class="form-control">
+                                        <option value="">---------------</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
@@ -61,6 +63,7 @@
                                 <div class="mb-3">
                                     <label for="">Choisir Une marque</label>
                                     <select name="brand" id="" class="form-control">
+                                        <option value="">------------</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
@@ -141,7 +144,7 @@
                             <div class="tab-pane fade border p-4" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="">Selectionner l'image</label>
-                                    <input type="file" name="image" multiple class="form-control">
+                                    <input type="file" name="image[]" multiple class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane fade border p-4" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
@@ -150,7 +153,7 @@
                           </div>
     
                           <div>
-                            <button type="submit" class="btn-primary">Valider</button>
+                            <button type="submit" class="btn-primary text-white">Valider</button>
                           </div>
                     </form>
                     
